@@ -1,0 +1,148 @@
+.cart-container {
+    position: fixed;
+    width: 65rem;
+    height: 100%;
+    background-color: #eeeeee;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    padding: 0rem 3rem;
+    color: #434343;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.container-heading {
+    font-size: 2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-heading>span {
+    font-size: 4rem;
+    cursor: pointer;
+}
+
+.container-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: scroll;
+    height: 75%;
+}
+
+.container-item {
+    display: flex;
+    gap: 1rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.item-img {
+    flex: 1;
+    padding: .5rem;
+}
+
+.item-img>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: .5rem;
+}
+
+.item-details {
+    flex: 2;
+    padding: 0 1rem;
+}
+
+.item-btn {
+    font-size: 2rem;
+    align-self: flex-end;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    display: block;
+}
+
+.item-btn:hover::after {
+    width: 100%;
+}
+
+.item-btn::after {
+    position: absolute;
+    content: "";
+    top: 1.5rem;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #000;
+    transition: all .2s;
+}
+
+.item-name {
+    font-size: 2.6rem;
+    text-transform: uppercase;
+
+}
+
+.item-description {
+    font-size: 1.8rem;
+    color: #0008;
+}
+
+.item-controller {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.qty-controller {
+    width: 16rem;
+    height: 4.5rem;
+    background-color: #0001;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    align-items: center;
+    border-radius: 3px;
+    gap: .5rem;
+}
+
+.qty-text {
+    width: 9rem;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-price {
+    font-size: 2rem;
+}
+
+h2 {
+    line-height: 0;
+}
+
+.qty-controller>svg:active {
+    scale: .9;
+    transition: all .1s;
+}
+
+.empty-text {
+    font-size: 3.5rem;
+    text-align: center;
+    color: #0003;
+    letter-spacing: 1px;
+}

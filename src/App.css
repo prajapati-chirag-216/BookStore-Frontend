@@ -1,0 +1,47 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  color: #000;
+  font-family: "Lato", sans-serif;
+  letter-spacing: .5px;
+}
+
+* {
+  box-sizing: inherit;
+  color: currentColor;
+}
+
+body {
+  margin: 0;
+}
+
+/* @media (max-width: 500px) {
+  body {
+    zoom: 1;
+  }
+} */
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #d3d3d3b8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d1d1d1;
+}
+
+input::placeholder {
+  color: #b9babc;
+}
+
+input:hover {
+  outline: none;
+}
