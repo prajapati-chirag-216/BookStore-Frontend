@@ -5,7 +5,7 @@
 
 .input-search {
     width: 35rem;
-    font-size: 2rem;
+    font-size: var(--medium-font-size);
     padding: 1rem;
     padding-left: 5rem;
     border-radius: 5px;

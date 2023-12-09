@@ -39,7 +39,7 @@ const ITEMS = [
   },
 ];
 
-function Cart() {
+function Cart(props) {
   const [items, setItems] = useState(ITEMS);
   const increseQtyHandler = (id) => {
     setItems((prevItems) =>
@@ -66,11 +66,19 @@ function Cart() {
   const removeItemHandler = (id) => {
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
+
+  const closeCartHandler = () => props.onClose();
+
   return (
-    <div className={classes["cart-container"]}>
+    <div
+      className={classes["cart-container"]}
+      style={{ right: props.isOpen ? "0" : "-70rem" }}
+    >
       <div className={classes["container-heading"]}>
         <h1>Cart</h1>
-        <span>&#x2715;</span>
+        <span onClick={closeCartHandler} className={classes["close-btn"]}>
+          &#x2715;
+        </span>
       </div>
       <div className={classes["container-items"]}>
         {items.length > 0 ? (
@@ -112,7 +120,7 @@ function Cart() {
             <HourglassEmptyIcon
               sx={{
                 fontSize: "8rem",
-                color: "#0003",
+                color: "var(--tertiary-font-color)",
                 marginTop: "50%",
                 alignSelf: "center",
               }}

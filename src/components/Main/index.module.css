@@ -5,12 +5,11 @@
 
 .container-heading {
     margin: auto;
-    font-size: 7rem;
+    font-size: 6.5rem;
     text-align: center;
     letter-spacing: 5px;
     text-transform: uppercase;
-    background-color: #d3d8dc;
-    background-image: linear-gradient(to right, #f6f7f8, #abadaf, #f6f7f8);
+    background-image: linear-gradient(to right, #f6f7f8, var(--tertiary-font-color), #f6f7f8);
     width: 70%;
     clip-path: polygon(8rem 0, 100% 0, calc(100% - 8rem) 100%, 0 100%);
     padding: 1.5rem;

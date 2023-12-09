@@ -6,7 +6,7 @@ import Signup from "../../components/Auth/Signup";
 function Auth() {
   const [authPage, setAuthPage] = useState("signup");
   const authChangeHandler = () => {
-    setAuthPage((prevState) => (prevState == "signup" ? "signin" : "signup"));
+    setAuthPage((prevState) => (prevState === "signup" ? "signin" : "signup"));
   };
   return (
     <div className={classes["auth-container"]}>

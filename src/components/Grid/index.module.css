@@ -11,7 +11,7 @@
 
 .grid-item {
     position: relative;
-    color: #fff;
+    color: var(--color-white);
     cursor: pointer;
     overflow: hidden;
     border-radius: 5px;

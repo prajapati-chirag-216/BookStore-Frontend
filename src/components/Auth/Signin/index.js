@@ -10,14 +10,14 @@ function Signin(props) {
       <motion.div
         className={classes["overlay"]}
         style={{
-          left: props.authPage == "signup" ? "0" : "-100%", // Adjust values as needed
+          left: props.authPage === "signup" ? "0" : "-100%", // Adjust values as needed
         }}
       >
         <div className={classes["overlay-text"]}>
           <h2>
-            {props.authPage == "signup" ? "Already" : "Don't"} have an Account?{" "}
+            {props.authPage === "signup" ? "Already" : "Don't"} have an Account?{" "}
             <span onClick={authChangeHandler}>
-              {props.authPage == "signup" ? "Signin" : "Signup"}
+              {props.authPage === "signup" ? "Signin" : "Signup"}
             </span>
           </h2>
         </div>

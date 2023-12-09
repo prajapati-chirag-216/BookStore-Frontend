@@ -10,7 +10,7 @@
     width: 60%;
     padding: 3rem;
     padding-bottom: 6rem;
-    color: gray;
+    color: var(--secondary-font-color);
 }
 
 .form {
@@ -21,7 +21,7 @@
 
 .form-input {
     padding: 1rem 2rem;
-    font-size: 2rem;
+    font-size: var(--medium-font-size);
     outline: none;
     width: 100%;
     border-radius: 3px;
@@ -31,21 +31,4 @@
 
 .form-input:last-of-type {
     margin-bottom: 3rem;
-}
-
-.form-text {
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-    margin-top: 5rem;
-}
-
-.form-text>span {
-    margin-left: 1rem;
-    cursor: pointer;
-}
-
-.form-text>span:hover {
-    color: #000;
-    text-underline-offset: .5rem;
-    text-decoration: underline;
 }

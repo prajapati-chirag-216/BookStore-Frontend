@@ -7,9 +7,10 @@ import Cart from "../../Cart";
 function Layout() {
   const [isOpen, setIsOpen] = useState(false);
   const openCartHandler = () => setIsOpen(true);
+  const closeCartHandler = () => setIsOpen(false);
   return (
     <div className={classes["main-container"]}>
-      <Cart isOpen={isOpen} />
+      <Cart isOpen={isOpen} onClose={closeCartHandler} />
       <Navigation onOpen={openCartHandler} />
       <Outlet />
       <Footer />
