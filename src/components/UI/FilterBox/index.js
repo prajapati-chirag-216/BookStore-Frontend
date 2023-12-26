@@ -10,7 +10,7 @@ function FilterBox() {
           placeholder="Sort By"
           className={classes["input-filter"]}
         />
-        <img src="down-arr.png" alt="" />
+        <img src="/down-arr.png" alt="" />
       </div>
       <div className={classes["filter-box--value"]}>
         <li>price High to Low</li>

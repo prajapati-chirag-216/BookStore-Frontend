@@ -7,6 +7,7 @@ function Button(props) {
       onClick={props.onClick}
       onSubmit={props.onSubmit}
       disabled={props.disabled}
+      style={{ color: props?.color || "auto", marginTop: props.marginTop }}
     >
       {props.children}
     </button>

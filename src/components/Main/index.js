@@ -3,16 +3,17 @@ import SearchBox from "../UI/SearchBox";
 import FilterBox from "../UI/FilterBox";
 import classes from "./index.module.css";
 import Grid from "../Grid";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 function Main(props) {
   return (
     <div className={classes["main-container"]}>
-      <h1 className={classes["container-heading"]}>{props.name}</h1>
+      <h1 className="main-heading">{props.name}</h1>
       <div className={classes["container-action"]}>
         <SearchBox placeHolder={props.searchHolder} />
-        <FilterBox />
+        {props.applyFilter && <FilterBox />}
       </div>
-      <Grid items={props.items} />
+      {props?.isLoading ? <LoadingSpinner /> : <Grid>{props.gridContent}</Grid>}
     </div>
   );
 }

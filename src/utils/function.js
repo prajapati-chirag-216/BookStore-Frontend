@@ -1,36 +1,4 @@
 import { getAccessToken } from "../utils/api";
-import { setAccessToken } from "../store/ui/ui.action";
-import { store } from "../store/store";
-import { decode } from "blurhash";
-
-export const genrateBlurImage = (hash) => {
-  const width = 32;
-  const height = 32;
-  const punch = 1;
-
-  //  new Promise((resolve,reject)=>{
-
-  //    try{
-  const pixels = decode(hash, width, height, punch);
-
-  const imageData = new ImageData(pixels, width, height);
-
-  const canvas = document.createElement("canvas");
-
-  canvas.width = width;
-  canvas.height = height;
-
-  const context = canvas.getContext("2d");
-
-  context.putImageData(imageData, 0, 0);
-
-  return canvas.toDataURL();
-
-  //  }
-
-  //  })
-};
-
 export function cookieParser() {
   const data = {};
   document.cookie.split(";").map((ele) => {
@@ -64,9 +32,28 @@ export const textFeildStyle = (feildIsValid) => {
           ? "internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133))"
           : "gray",
       letterSpacing: "0.5px",
+      fontSize: "1.6rem",
     },
+    fontSize: "1.6rem",
   };
 };
+export const uploadToCloud = async (image) => {
+  const formData = new FormData();
+  formData.append("file", image);
+  formData.append("upload_preset", "AddImage");
+  formData.append("cloud_name", "dzpuekeql");
+
+  const result = await fetch(
+    "https://api.cloudinary.com/v1_1/dzpuekeql/image/upload",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+  const data = await result.json();
+  return data.secure_url;
+};
+
 export const formateData = (value, formateWith, validLength) => {
   let data = value.replace(/\s/g, "").replace(/\D/g, "");
 

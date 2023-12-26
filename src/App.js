@@ -13,8 +13,12 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import AuthPage from "./pages/AuthPage";
 import ProductPage from "./pages/ProductPage";
-
+// import ProtectedRoutes, {
+//   loader as profileLoader,
+// } from "./routes/ProtectedRoutes";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 import "./App.css";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Wrapper />} errorElement={<Error />}>
@@ -24,7 +28,16 @@ const router = createBrowserRouter(
         <Route index element={<Navigate to="/home" />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/product" element={<ProductPage />} />
+        <Route path="/products/:id" element={<ProductPage />} />
+        <Route path="/product/:id" element={<ProductDetailsPage />} />
+        {/* <Route
+          element={
+            <ProtectedRoutes message="Access denied! You don't have permissions for this page." />
+          }
+          loader={profileLoader}
+        >
+          <Route index element={<ProductDetailsPage />} />
+        </Route> */}
       </Route>
     </Route>
   )
