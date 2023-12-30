@@ -90,3 +90,36 @@ export const formateDate = (value) => {
   let isValid = newDate[0] !== "00" && +newDate[0] <= 12 && +newDate[1] > 23; // letter we will change to currunt time
   return { tempDate, isValid };
 };
+
+export const findCountryValueHandler = (countryList, countryName) => {
+  let countryId, countryValue;
+  for (let i = 0; i < countryList.length; i++) {
+    if (countryList[i].name == countryName) {
+      countryId = countryList[i].id;
+      countryValue = +countryList[i].id.slice(-1);
+      break;
+    }
+  }
+  return { countryId, countryValue };
+};
+export const findStateValueHandler = (stateList, stateName, countryId) => {
+  let stateId, stateValue;
+  for (let i = 0; i < stateList.length; i++) {
+    if (stateList[i].name == stateName && stateList[i].id.includes(countryId)) {
+      stateId = stateList[i].id;
+      stateValue = +stateList[i].id.slice(-1);
+      break;
+    }
+  }
+  return { stateId, stateValue };
+};
+export const findCityValueHandler = (cityList, cityName, stateId) => {
+  let cityValue;
+  for (let i = 0; i < cityList.length; i++) {
+    if (cityList[i].name == cityName && cityList[i].id.includes(stateId)) {
+      cityValue = +cityList[i].id.slice(-1);
+      break;
+    }
+  }
+  return cityValue;
+};

@@ -1,0 +1,40 @@
+.order-container {
+    width: 100%;
+    height: 100%;
+    padding: 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.container-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-heading>div {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.container-heading--primary {
+    font-size: 3.5rem;
+    color: var(--color-black);
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.container-heading--secondary {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--secondary-font-color);
+}
+
+.container-main {
+    margin-top: 5rem;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+
+}

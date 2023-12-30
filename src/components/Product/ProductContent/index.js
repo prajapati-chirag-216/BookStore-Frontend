@@ -1,23 +1,106 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./index.module.css";
 import Button from "../../Button";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../../store/cart-slice";
+import { uiActions } from "../../../store/ui-slice";
+import { SNACKBAR_DETAILS } from "../../../utils/variables";
+
 function ProductContent(props) {
-  return props.items.map((item) => (
-    <div key={item._id} className={classes["item-container"]}>
-      <span className={classes["item-quantity"]}>{item.quantity}</span>
+  const dispatch = useDispatch();
+  const qtyStatus = useSelector((state) => state.cart.qtyStatus);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const [remainingItems, setRemainingItems] = useState([]);
+
+  const addToCartHandler = (item) => {
+    dispatch(cartActions.setQtyStatus({ status: true, id: item._id }));
+    dispatch(cartActions.setAddItem(item));
+    // by using spread operetor "...SNACKBAR_DETAILS" it counts it as new object every time even if same object data is provided
+    dispatch(uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_ADD_ITEM }));
+  };
+
+  const updateRemainingItems = () => {
+    const updatedItems = props.items.map((item) => {
+      const cartItem = cartItems.find((cartItem) => cartItem._id === item._id);
+      if (cartItem) {
+        return {
+          ...item,
+          quantity: item.quantity - cartItem.quantity,
+        };
+      }
+      return item;
+    });
+    setRemainingItems(updatedItems);
+  };
+
+  useEffect(() => {
+    updateRemainingItems();
+    const timer = setTimeout(() => {
+      dispatch(cartActions.setQtyStatus({ status: false }));
+    }, 200);
+    return () => clearTimeout(timer);
+  }, [cartItems, props.items, dispatch]);
+
+  return remainingItems.map((item) => (
+    <div
+      key={item._id}
+      className={`${classes["item-container"]} ${
+        item.status.toLowerCase() == "not-available" || item.quantity <= 0
+          ? classes["item-container--disable"]
+          : ""
+      }`}
+    >
+      {(item.status.toLowerCase() == "not-available" || item.quantity <= 0) && (
+        <div className={classes["not-avilable"]}>
+          <h1>Not Avilable</h1>
+        </div>
+      )}
+
+      <span
+        className={`${classes["item-quantity"]} ${
+          qtyStatus.status && qtyStatus.id == item._id
+            ? classes["bump"]
+            : "default"
+        }`}
+      >
+        {item.quantity}
+      </span>
+
       <div
         className={classes["image-container"]}
-        onClick={props.onClick.bind(null, item._id)}
+        style={{
+          cursor:
+            item.status.toLowerCase() == "available" ? "pointer" : "normal",
+        }}
+        onClick={
+          item.status.toLowerCase() == "available"
+            ? props.onClick.bind(null, item._id)
+            : () => {}
+        }
       >
         <img className={classes["item-img"]} src={item.images[0]} alt="img" />
         <h1 className={classes["item-author"]}>- {item.authorName}</h1>
         <h1 className={classes["item-name"]}>{item.bookName}</h1>
       </div>
       <div className={classes["item-ctrl"]}>
-        <span className={classes["item-price"]}>{item.price} &#8377;</span>
-        <Button className="btn-large" color="var(--primary-font-color)">
+        <span
+          className={`${classes["item-price"]} ${
+            item.status.toLowerCase() == "not-available"
+              ? classes["item-price--disable"]
+              : ""
+          }`}
+        >
+          {item.price} &#8377;
+        </span>
+        <Button
+          className="btn-large"
+          color="var(--primary-font-color)"
+          onClick={addToCartHandler.bind(null, item)}
+          disabled={item.status.toLowerCase() == "not-available"}
+        >
           Add To Cart
-        </Button>{" "}
+        </Button>
       </div>
     </div>
   ));

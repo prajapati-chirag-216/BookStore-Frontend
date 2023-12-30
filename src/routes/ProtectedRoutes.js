@@ -1,42 +1,40 @@
-import React, { Fragment, Suspense, useEffect, useState } from "react";
-import { Await, Navigate, Outlet, useLoaderData } from "react-router-dom";
+import React, { Fragment, Suspense, useEffect, useLayoutEffect } from "react";
+import {
+  Await,
+  Navigate,
+  Outlet,
+  useLoaderData,
+  useNavigate,
+} from "react-router-dom";
 import { fetchUserProfile } from "../utils/api";
 import { useDispatch, useSelector } from "react-redux";
-import { setSnackBar } from "../store/ui/ui.action";
-import { selectCartItems } from "../store/cart/cart.selector";
 import CircularProgress from "@mui/material/CircularProgress";
+import { SNACKBAR_DETAILS } from "../utils/variables";
+import { uiActions } from "../store/ui-slice";
 
 const ProtectedRoutes = (props) => {
   const dispatch = useDispatch();
   const loaderData = useLoaderData();
-  const cartItems = useSelector(selectCartItems);
-  useEffect(() => {
-    if (!loaderData.userProfile) {
-      dispatch(
-        setSnackBar({
-          status: true,
-          message: "You need to login to your account",
-          severity: "info",
-        })
-      );
-    } else if (!props.isProfilePage && cartItems.length === 0) {
-      dispatch(
-        setSnackBar({
-          status: true,
-          severity: "info",
-          message: "Your cart is empty",
-        })
-      );
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const navigate = useNavigate();
+  // this will run before component render oposite of useEffect
+  useLayoutEffect(() => {
+    if (!loaderData) {
+      dispatch(uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_UNAUTHORIZED }));
+    } else if (!props?.isProfilePage && cartItems.length === 0) {
+      navigate("/home", { replace: true });
+      dispatch(uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_EMPTY_CART }));
     }
   }, []);
+
   return (
     <Suspense fallback={<CircularProgress sx={{ color: "black" }} />}>
       <Await resolve={loaderData}>
-        {(data) =>
-          data?.userProfile ? (
+        {(isLoggedin) =>
+          isLoggedin ? (
             <Outlet />
           ) : (
-            <Navigate to={!data?.userProfile ? "/login" : "/home"} />
+            <Navigate to={!isLoggedin ? "/auth" : "/home"} />
           )
         }
       </Await>

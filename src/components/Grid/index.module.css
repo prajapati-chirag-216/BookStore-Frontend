@@ -2,11 +2,25 @@
     margin-top: 20rem;
     display: grid;
     width: 100%;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(50rem, 1fr));
     gap: 5rem;
     grid-auto-rows: 70rem;
     /* Set a default row height for all rows */
+}
+
+.grid-small {
+    grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+    gap: 5rem;
+    grid-auto-rows: 57rem;
+    direction: rtl;
+
+    /* Set a default row height for all rows */
+}
+
+.reverse {
+    &>* {
+        direction: ltr;
+    }
 }
 
 /* Define specific heights for the first two rows */

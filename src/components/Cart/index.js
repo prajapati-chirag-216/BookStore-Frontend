@@ -1,71 +1,48 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import classes from "./index.module.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import Button from "../Button";
-const ITEMS = [
-  {
-    id: "1",
-    name: "The Sparrow",
-    description:
-      "this is nice book you shoud buy it trust me this is nice book trust me you should buy it",
-    price: 100,
-    quantity: 1,
-  },
-  {
-    id: "2",
-    name: "The Book",
-    description:
-      "this is nice book you shoud buy it trust me this is nice book trust me you should buy it",
-    price: 200,
-    quantity: 2,
-  },
-  {
-    id: "3",
-    name: "The Book",
-    description:
-      "this is nice book you shoud buy it trust me this is nice book trust me you should buy it",
-    price: 200,
-    quantity: 2,
-  },
-  {
-    id: "4",
-    name: "The Book",
-    description:
-      "this is nice book you shoud buy it trust me this is nice book trust me you should buy it",
-    price: 200,
-    quantity: 2,
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
+import { useNavigate } from "react-router-dom";
 
 function Cart(props) {
-  const [items, setItems] = useState(ITEMS);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const qtyStatus = useSelector((state) => state.cart.qtyStatus);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const increseQtyHandler = (id) => {
-    setItems((prevItems) =>
-      prevItems.filter((item) => {
-        if (item.id === id) {
-          return item.quantity++;
-        }
-        return item;
-      })
-    );
+    dispatch(cartActions.setQtyStatus({ status: true, id }));
+    dispatch(cartActions.setIncreaseQty(id));
   };
+
   const descreseQtyHandler = (id) => {
-    const updatedItems = items.filter((item) => {
-      if (item.id === id) {
-        if (item.quantity > 1) {
-          return item.quantity--;
-        }
-      } else {
-        return item;
-      }
-    });
-    setItems(updatedItems);
+    dispatch(cartActions.setQtyStatus({ status: true, id }));
+    dispatch(cartActions.setDecreaseQty(id));
   };
+
   const removeItemHandler = (id) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    dispatch(cartActions.setQtyStatus({ status: true, id }));
+    dispatch(cartActions.setRemoveItem(id));
   };
+
+  const navigateHandler = () => {
+    navigate("/checkout");
+  };
+
+  useEffect(() => {
+    let timer;
+    if (qtyStatus.status) {
+      setTimeout(() => {
+        dispatch(cartActions.setQtyStatus({ status: false }));
+      }, 200);
+    }
+
+    return () => clearTimeout(timer);
+  }, [qtyStatus]);
 
   const closeCartHandler = () => props.onClose();
 
@@ -81,33 +58,33 @@ function Cart(props) {
         </span>
       </div>
       <div className={classes["container-items"]}>
-        {items.length > 0 ? (
-          items.map((item) => (
-            <div className={classes["container-item"]} key={item.id}>
+        {cartItems.length > 0 ? (
+          cartItems.map((item) => (
+            <div className={classes["container-item"]} key={item._id}>
               <div className={classes["item-img"]}>
-                <img src="display-img.jpeg" />
+                <img src={item.images[0]} />
               </div>
               <div className={classes["item-details"]}>
-                <h2 className={classes["item-name"]}>{item.name}</h2>
+                <h2 className={classes["item-name"]}>{item.bookName}</h2>
                 <p className={classes["item-description"]}>
                   {item.description.slice(0, 70)}..
                 </p>
                 <div className={classes["qty-controller"]}>
                   <RemoveIcon
                     sx={{ fontSize: "3rem", cursor: "pointer" }}
-                    onClick={descreseQtyHandler.bind(null, item.id)}
+                    onClick={descreseQtyHandler.bind(null, item._id)}
                   />
-                  <h3 className={classes["qty-text"]}>{item.quantity}</h3>
+                  <h1 className={classes["qty-text"]}>{item.quantity}</h1>
                   <AddIcon
                     sx={{ fontSize: "3rem", cursor: "pointer" }}
-                    onClick={increseQtyHandler.bind(null, item.id)}
+                    onClick={increseQtyHandler.bind(null, item._id)}
                   />
                 </div>
                 <div className={classes["item-controller"]}>
                   <h2 className={classes["item-price"]}>{item.price}</h2>
                   <h2
                     className={classes["item-btn"]}
-                    onClick={removeItemHandler.bind(null, item.id)}
+                    onClick={removeItemHandler.bind(null, item._id)}
                   >
                     Remove
                   </h2>
@@ -129,7 +106,11 @@ function Cart(props) {
           </Fragment>
         )}
       </div>
-      <Button className="btn-large" disabled={items.length <= 0}>
+      <Button
+        className="btn-large"
+        disabled={cartItems.length <= 0}
+        onClick={navigateHandler}
+      >
         Checkoute
       </Button>
     </div>

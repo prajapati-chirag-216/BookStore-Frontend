@@ -7,6 +7,8 @@ import { loginUser } from "../../../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../../../store/ui-slice";
+import { SNACKBAR_DETAILS, STATUS } from "../../../../utils/variables";
+import { cartActions } from "../../../../store/cart-slice";
 
 function Form(props) {
   const navigate = useNavigate();
@@ -71,11 +73,20 @@ function Form(props) {
       email: emailState.value,
       password: passwordState.value,
     };
-    dispatch(uiActions.setIsLoadingBar({ status: "LOAD" }));
-    const data = await loginUser(userData);
-    dispatch(uiActions.setIsLoadingBar({ status: "COMPLETE" }));
-    if (data.success) {
+    dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
+    try {
+      await loginUser(userData);
       navigate("/home");
+      dispatch(uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_LOGGED_IN }));
+      dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
+      dispatch(cartActions.setAddItem());
+    } catch (err) {
+      dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
+      if (err.response?.data?.message.toLowerCase().includes("password")) {
+        passwordRef.current.focus();
+      } else {
+        emailRef.current.focus();
+      }
     }
   };
 

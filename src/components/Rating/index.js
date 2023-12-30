@@ -26,7 +26,7 @@ function getLabelText(value) {
 }
 
 const BasicRating = forwardRef((props, ref) => {
-  const [value, setValue] = useState(props?.value || 2);
+  const [value, setValue] = useState(props?.value || props.defaultValue || 0);
   const [hover, setHover] = useState(-1);
   const inputRef = useRef(null);
   useImperativeHandle(ref, () => {

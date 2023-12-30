@@ -101,7 +101,7 @@ function Form(props) {
         value={messageState.value}
         isValid={messageIsValid}
       />
-      <BasicRating ref={ratingRef} />
+      <BasicRating ref={ratingRef} defaultValue="2.5" />
       <Button className="btn-large" marginTop="2rem">
         Submit
       </Button>

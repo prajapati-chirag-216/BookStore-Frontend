@@ -24,6 +24,18 @@
     gap: 2rem;
     padding: 2rem;
     overflow-y: scroll;
+    position: relative;
+}
+
+.empty-text {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--large-font-size);
+    color: var(--secondary-font-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .item-container {

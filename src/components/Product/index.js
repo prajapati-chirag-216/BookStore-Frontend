@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ProductContent from "../Product/ProductContent";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
-import { STATUS } from "../../utils/actions";
+import { STATUS } from "../../utils/variables";
 
 function Product() {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ function Product() {
   const navigateHandler = (id) => {
     navigate("/product/" + id);
   };
+
   useEffect(() => {
     const pathName = location.pathname;
     const id = pathName.split("/")[2];
@@ -30,6 +31,7 @@ function Product() {
       dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
     });
   }, []);
+
   return (
     <div>
       <Main

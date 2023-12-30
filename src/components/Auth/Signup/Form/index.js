@@ -8,8 +8,14 @@ import {
   passwordReducer,
 } from "../../../../reducers";
 import { signupUser } from "../../../../utils/api";
+import { SNACKBAR_DETAILS, STATUS } from "../../../../utils/variables";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../../../store/ui-slice";
+import { useNavigate } from "react-router-dom";
 
 function Form(props) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -87,7 +93,26 @@ function Form(props) {
       email: emailState.value,
       password: passwordState.value,
     };
-    const data = await signupUser(userData);
+    dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
+    try {
+      await signupUser(userData);
+      navigate("/home");
+      dispatch(uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_SIGNED_UP }));
+      dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
+    } catch (err) {
+      dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
+      if (
+        err.response?.data?.message.toLowerCase().includes("11000") ||
+        err.response?.data?.message.toLowerCase().includes("duplicate key")
+      ) {
+        emailRef.current.focus();
+        dispatch(
+          uiActions.setSnackBar({
+            ...SNACKBAR_DETAILS.ON_DUPLICATE_CREDENTIALS,
+          })
+        );
+      }
+    }
   };
 
   return (

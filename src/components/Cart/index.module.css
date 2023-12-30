@@ -109,6 +109,10 @@
     color: var(--secondary-font-color);
 }
 
+.item-description::first-letter {
+    text-transform: uppercase;
+}
+
 .item-controller {
     display: flex;
     justify-content: space-between;

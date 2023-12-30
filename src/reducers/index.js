@@ -29,9 +29,13 @@ export const nameReducer = (state, action) => {
     };
   }
   if (action.type === "INPUT_BLUR") {
+    startsWithNumber = /^\d/.test(state.value.trim());
     return {
       value: state.value.trim(),
-      isValid: state.value.trim().length > 5 && state.value.trim().length <= 30,
+      isValid:
+        state.value.trim().length > 5 &&
+        state.value.trim().length <= 30 &&
+        !startsWithNumber,
     };
   }
   return { value: "", isValid: null };
@@ -143,31 +147,25 @@ export const numberReducer = (state, action) => {
 };
 
 export const generalReducer = (state, action) => {
-  let newVal;
-
-  if (action.value !== undefined) {
-    newVal = action.value;
-
-    newVal = newVal.replace(/\d/g, "");
-  }
-
   if (action.type === "INPUT_FETCH") {
     return {
-      value: newVal,
+      value: action.value,
       isValid:
-        newVal.length == 0 ? null : newVal.length > 3 && newVal.length < 300,
+        action.value.length == 0
+          ? null
+          : action.value.length > 5 && action.value.length < 300,
     };
   }
   if (action.type === "USER_INPUT") {
     return {
-      value: newVal,
-      isValid: newVal.length > 3 && newVal.length < 300,
+      value: action.value,
+      isValid: action.value.length > 5 && action.value.length < 300,
     };
   }
   if (action.type === "INPUT_BLUR") {
     return {
       value: state.value,
-      isValid: state.value.length > 3 && state.value.length < 300,
+      isValid: state.value.length > 5 && state.value.length < 300,
     };
   }
   return { value: "", isValid: null };
@@ -178,7 +176,6 @@ export const pinCodeReducer = (state, action) => {
 
   if (action.value !== undefined) {
     newVal = action.value;
-
     newVal = newVal.replace(/\D/g, "");
   }
 

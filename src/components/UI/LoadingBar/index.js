@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBar from "react-top-loading-bar";
-import { STATUS } from "../../../utils/actions";
+import { STATUS } from "../../../utils/variables";
 import { uiActions } from "../../../store/ui-slice";
 import classes from "./index.module.css";
 

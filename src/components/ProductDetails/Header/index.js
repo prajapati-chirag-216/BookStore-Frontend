@@ -3,11 +3,29 @@ import classes from "./index.module.css";
 import Button from "../../Button";
 import BasicRating from "../../Rating";
 import PersonIcon from "@mui/icons-material/Person";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../../store/cart-slice";
 
 function Header({ productDetails }) {
+  const dispatch = useDispatch();
+
   const [displayImage, setDisplayImage] = useState(productDetails.images[0]);
   const displayChangeHandler = (img) => {
     setDisplayImage(img);
+  };
+  const addItemHandler = () => {
+    const productData = {
+      _id: productDetails._id,
+      authorName: productDetails.authorName,
+      bookName: productDetails.bookName,
+      category: productDetails.category,
+      description: productDetails.description,
+      status: productDetails.status,
+      images: productDetails.images,
+      quantity: productDetails.quantity,
+      price: productDetails.price,
+    };
+    dispatch(cartActions.setAddItem(productData));
   };
 
   return (
@@ -55,7 +73,7 @@ function Header({ productDetails }) {
             </h1>
           </div>
         </div>
-        <Button className="btn-large" marginTop="2rem">
+        <Button className="btn-large" marginTop="2rem" onClick={addItemHandler}>
           Add to cart
         </Button>
         <div className={classes["description-container"]}>

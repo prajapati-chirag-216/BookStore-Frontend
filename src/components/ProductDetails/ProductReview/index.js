@@ -11,16 +11,21 @@ import {
 import moment from "moment";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../../store/ui-slice";
+import { SNACKBAR_DETAILS } from "../../../utils/variables";
+import { useNavigate } from "react-router-dom";
 
 function ProductReview(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [myReview, setMyReview] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const [isReviewed, setIsReviewed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const openFormHandler = () => setIsFormVisible(!isFormVisible);
 
   const fetchUserProfileHandler = async () => {
     const data = await fetchUserProfile();
@@ -37,6 +42,15 @@ function ProductReview(props) {
     return data;
   };
 
+  const openFormHandler = async () => {
+    if (userProfile) {
+      setIsFormVisible(!isFormVisible);
+    } else {
+      dispatch(uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_UNAUTHORIZED }));
+      navigate("/auth", { replace: true });
+    }
+  };
+
   const closeFormHandler = () => {
     setIsFormVisible(false);
   };
@@ -44,6 +58,7 @@ function ProductReview(props) {
   const updateReviewsHandler = () => {
     closeFormHandler();
     setIsReviewed(true);
+    props.onReviewed();
   };
 
   useEffect(() => {
@@ -53,10 +68,13 @@ function ProductReview(props) {
         if (data) {
           setMyReview(data);
           setIsReviewed(true);
+          return;
         }
+        setIsLoading(false);
       });
     }
   }, [isReviewed, userProfile]);
+
   useEffect(() => {
     if (!userProfile) {
       fetchUserProfileHandler().then((data) => {
@@ -69,12 +87,12 @@ function ProductReview(props) {
         const filteredReviews = ProductReviews.filter(
           (review) => review._id !== myReview._id
         );
-        setReviews([myReview, ...filteredReviews]);
-        setIsLoading(false);
+        setReviews([{ ...myReview, name: "You" }, ...filteredReviews]);
       } else {
         setReviews(ProductReviews);
-        setIsLoading(false);
+        // setIsLoading(false);
       }
+      setIsLoading(false);
     });
   }, [myReview]);
 
@@ -83,9 +101,11 @@ function ProductReview(props) {
       <div className={classes["review-container"]}>
         <h1 className="main-heading">Reviews</h1>
         <div className={classes["item-reviews"]}>
-          {isLoading ? (
-            <LoadingSpinner />
-          ) : (
+          {isLoading && <LoadingSpinner />}
+          {!isLoading && reviews.length == 0 && (
+            <p className={classes["empty-text"]}>No Reviews Yet</p>
+          )}
+          {!isLoading &&
             reviews.map((review) => {
               return (
                 <div className={classes["item-container"]} key={review._id}>
@@ -105,14 +125,13 @@ function ProductReview(props) {
                   </h1>
                 </div>
               );
-            })
-          )}
+            })}
         </div>
       </div>
       <div className={classes["form-ctrl"]}>
         {isReviewed && (
           <div className={classes["success-text"]}>
-            <h1>Thanks for your presious review</h1>
+            <h1>Thanks for your precious review</h1>
           </div>
         )}
         {!isFormVisible && !isReviewed && (

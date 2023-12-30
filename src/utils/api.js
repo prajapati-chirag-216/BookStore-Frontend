@@ -107,7 +107,6 @@ export const addProduct = async (productData) => {
     const response = await AxiosInstance(config);
     return response;
   } catch (err) {
-    console.log("err", err);
     throw err;
   }
 };
@@ -200,7 +199,49 @@ export const deleteCategory = async (id) => {
   return response;
 };
 
-export const getOrders = async () => {
+export const addCartItems = async (items) => {
+  const config = {
+    method: "POST",
+    url: `/addCartItems`,
+    data: items,
+    withCredentials: true,
+  };
+  const response = await AxiosInstance(config);
+  return response;
+};
+
+export const postOrder = async (orderData) => {
+  try {
+    const config = {
+      method: "POST",
+      url: `/postOrder`,
+      data: orderData,
+      withCredentials: true,
+    };
+    const response = await AxiosInstance(config);
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getUserOrders = async () => {
+  try {
+    const config = {
+      method: "get",
+      url: `/getUserOrders`,
+      withCredentials: true,
+    };
+
+    const response = await AxiosInstance(config);
+
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getAllOrders = async () => {
   const config = {
     url: `/getAllOrders`,
     withCredentials: true,

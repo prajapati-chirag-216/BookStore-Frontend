@@ -5,7 +5,7 @@ import { getProduct } from "../../utils/api";
 import ProductReview from "./ProductReview";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
-import { STATUS } from "../../utils/actions";
+import { STATUS } from "../../utils/variables";
 
 function ProductDetails() {
   const location = useLocation();
@@ -15,23 +15,36 @@ function ProductDetails() {
   const dispatch = useDispatch();
 
   const [productDetails, setProductDetails] = useState(null);
+
   const fetchProductDetails = async () => {
     const data = await getProduct(productId);
     return data;
   };
+
+  const updateDetailsHandler = async () => {
+    dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
+    const data = await fetchProductDetails();
+    setProductDetails(data);
+    dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
+  };
+
   useEffect(() => {
     dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
     fetchProductDetails().then((data) => {
       setProductDetails(data);
-      console.log(data);
       dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
     });
   }, []);
+
   return (
     <Fragment>
       {productDetails && <Header productDetails={productDetails} />}
       {productDetails && (
-        <ProductReview productDetails={productDetails} productId={productId} />
+        <ProductReview
+          productDetails={productDetails}
+          productId={productId}
+          onReviewed={updateDetailsHandler}
+        />
       )}
     </Fragment>
   );

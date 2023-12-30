@@ -15,6 +15,11 @@
     background-color: #0002;
 }
 
+.btn:not(:disabled):active {
+    scale: 0.95;
+    background-color: #0003;
+}
+
 .btn-small {
     padding: 1rem 2rem;
     font-size: var(--medium-font-size);
@@ -27,5 +32,5 @@
 
 .btn:disabled {
     cursor: not-allowed;
-    color: var(--tertiary-font-color)
+    color: var(--tertiary-font-color) !important
 }

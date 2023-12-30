@@ -77,6 +77,7 @@ const Input = forwardRef((props, ref) => {
         required={props.required}
         readOnly={props.readOnly}
         maxLength={props.maxLength}
+        autoComplete={props.autoComplete || "on"}
       />
       <label htmlFor="name" className={classes["label"]}>
         {props.placeholder}
