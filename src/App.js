@@ -11,6 +11,7 @@ import Layout from "./components/UI/Layout";
 import Error from "./components/UI/Error";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 import AuthPage from "./pages/AuthPage";
 import ProductPage from "./pages/ProductPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
@@ -21,9 +22,9 @@ import CheckoutPage from "./pages/CheckoutPage";
 import Shipping from "./components/Checkout/Shipping";
 import Information from "./components/Checkout/Information";
 import ProfilePage from "./pages/ProfilePage";
-import "./App.css";
 import OrderHistory from "./components/Profile/OrderHistory";
 import OrderStatus from "./components/Profile/OrderHistory/OrderStatus";
+import "./App.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
         <Route index element={<Navigate to="/home" />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

@@ -3,6 +3,7 @@
     height: 80vh;
     background-repeat: no-repeat;
     background-size: 120rem;
+    margin-top: 5rem;
     background-position: center;
-    background-image: url(../../../../public/display-img-1.png);
+    background-image: url(../../../../public/display.jpeg);
 }
