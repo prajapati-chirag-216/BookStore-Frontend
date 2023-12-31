@@ -11,13 +11,13 @@ import { uiActions } from "../../../store/ui-slice";
 import { STATUS } from "../../../utils/variables";
 
 function Navigation(props) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
   const [activatedLink, setActivatedLink] = useState(
     pathname === "/contact" ? 2 : pathname === "/about" ? 1 : 0
   );
+  const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -51,11 +51,13 @@ function Navigation(props) {
   }, [cartItems]);
 
   useEffect(() => {
-    fetchUserProfileHandler().then((data) => {
-      if (data) {
-        setUserProfile(data);
-      }
-    });
+    fetchUserProfileHandler()
+      .then((data) => {
+        if (data) {
+          setUserProfile(data);
+        }
+      })
+      .catch((err) => {});
   }, []);
 
   const openCartHandler = () => props.onOpen();

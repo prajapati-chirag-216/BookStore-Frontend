@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import store from "../../store";
 import { uiActions } from "../../store/ui-slice";
 import axios from "../axios";
@@ -23,6 +24,8 @@ axios.interceptors.response.use(
       originalConfig._retry = true;
       await genrateAccessToken();
       return axios(originalConfig);
+    } else if (error.response?.data?.message == "invalid access") {
+      return redirect("/auth");
     } else if (
       error.response?.status === 401 ||
       error.response?.status === 400 ||
