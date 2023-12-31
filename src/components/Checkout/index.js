@@ -15,7 +15,6 @@ import { postOrder } from "../../utils/api";
 import { cartActions } from "../../store/cart-slice";
 import { uiActions } from "../../store/ui-slice";
 import CheckIcon from "@mui/icons-material/Check";
-// import { setSuccess } from "../../store/ui/ui.action";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -75,13 +74,16 @@ const Checkout = () => {
             uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_NOT_AVAILABLE })
           );
         } else {
-          dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
+          dispatch(
+            uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_ORDER_CANCLED })
+          );
         }
+        dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
       }
       dispatch(cartActions.clearCart());
       navigate("/home", { replace: true });
       dispatch(orderActions.clearOrderInfo());
-      // for now here we make api request
+      // for now here we made api request
     }
   };
 

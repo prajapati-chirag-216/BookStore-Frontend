@@ -1,13 +1,15 @@
 import React, { Fragment, useEffect, useState } from "react";
 import classes from "./index.module.css";
 import Stepper from "../../../Checkout/Stepper";
-import { STEP_LABELS_ORDER_STATUS } from "../../../../utils/variables";
+import { STATUS, STEP_LABELS_ORDER_STATUS } from "../../../../utils/variables";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import DoorBackIcon from "@mui/icons-material/DoorBack";
 import { getOrderById } from "../../../../utils/api";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../../../store/ui-slice";
 
 const defaultStyle = { fontSize: "2.5rem", color: "var(--color-white)" };
 const ICONS = [
@@ -17,6 +19,7 @@ const ICONS = [
 ];
 
 function OrderStatus(props) {
+  const dispatch = useDispatch();
   const location = useLocation();
   const pathName = location.pathname;
   const id = pathName.split("/")[3];
@@ -40,6 +43,7 @@ function OrderStatus(props) {
           ? 2
           : 3;
       setOrderData(data);
+      dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
     });
   }, []);
 

@@ -66,6 +66,7 @@
 
 .bubble-active {
     box-shadow: 0 2px 1rem #0005;
+    color: var(--color-white);
 }
 
 .bubble-complete {

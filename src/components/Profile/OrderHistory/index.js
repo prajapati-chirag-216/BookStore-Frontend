@@ -9,11 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../../store/ui-slice";
 import { SNACKBAR_DETAILS, STATUS } from "../../../utils/variables";
 import { cartActions } from "../../../store/cart-slice";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 
 function OrderHistory() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [orderData, setOrderData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const fetchOrderDataHandler = async () => {
@@ -31,19 +33,24 @@ function OrderHistory() {
     }
     dispatch(uiActions.setSnackBar(SNACKBAR_DETAILS.ON_LOGGED_OUT));
     dispatch(cartActions.clearCart());
+    setIsLoading(false);
     navigate("/auth", { replace: true });
   };
 
   const navigateHandler = (id) => {
+    dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
     navigate("orderStatus/" + id);
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetchOrderDataHandler().then((data) => {
       if (data) {
         setOrderData(data);
       }
+      setIsLoading(false);
     });
+    dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
   }, []);
 
   return (
@@ -60,11 +67,17 @@ function OrderHistory() {
         </Button>
       </div>
       <div className={classes["container-main"]}>
-        <Grid small marginTop="0" reverse>
-          {orderData.length > 0 && (
-            <OrderContent orderData={orderData} onClick={navigateHandler} />
-          )}
-        </Grid>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : orderData.length == 0 ? (
+          <h1 className={classes["empty-text"]}>No orders Yet!</h1>
+        ) : (
+          <Grid small marginTop="0">
+            {orderData.length > 0 && (
+              <OrderContent orderData={orderData} onClick={navigateHandler} />
+            )}
+          </Grid>
+        )}
       </div>
     </div>
   );

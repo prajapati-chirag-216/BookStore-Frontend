@@ -10,7 +10,6 @@
     border-radius: 2px;
     background-color: var(--color-white);
     border: none;
-    /* border-bottom: 3px solid pink; */
     border-bottom: 3px solid var(--color-black);
     display: block;
 }

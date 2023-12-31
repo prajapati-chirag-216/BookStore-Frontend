@@ -35,10 +35,13 @@ function Navigation(props) {
   };
 
   const navigateHandler = () => {
-    dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
     if (userProfile) {
-      navigate("/myProfile");
+      if (pathname !== "/myProfile") {
+        dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
+        navigate("/myProfile");
+      }
     } else {
+      dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
       navigate("/auth");
     }
   };

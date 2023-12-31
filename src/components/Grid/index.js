@@ -6,7 +6,7 @@ function Grid(props) {
     <div
       className={`${classes["grid"]} ${
         props.small ? classes["grid-small"] : ""
-      } ${props.reverse ? classes["reverse"] : ""}`}
+      }`}
       style={{
         marginTop: props?.marginTop ? props.marginTop : "20rem",
       }}

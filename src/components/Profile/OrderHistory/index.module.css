@@ -38,3 +38,12 @@
     overflow-y: scroll;
 
 }
+
+.empty-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    color: var(--secondary-font-color);
+    font-size: var(--large-font-size);
+    text-transform: uppercase;
+}

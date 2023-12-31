@@ -41,7 +41,7 @@ function Stepper(props) {
           </div>
           <h1
             className={`${classes["container-label"]} ${
-              props.stepValue > index + 1 ? classes["label-active"] : ""
+              props.stepValue > index ? classes["label-active"] : ""
             }`}
           >
             {label}

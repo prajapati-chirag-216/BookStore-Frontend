@@ -16,14 +16,14 @@ export const LIST = {
   COUNTRY_LIST: [
     { id: "default", name: "select country" },
     { id: "country-1", name: "india" },
-    { id: "country-2", name: "newyork" },
+    { id: "country-2", name: "united states" },
   ],
   STATE_LIST: [
     { id: "default", name: "select state" },
     { id: "country-1_state-1", name: "gujrat" },
     { id: "country-1_state-2", name: "rajasthan" },
     { id: "country-1_state-3", name: "maharashtra" },
-    { id: "country-2_state-1", name: "bhole" },
+    { id: "country-2_state-1", name: "california" },
   ],
   CITY_LIST: [
     { id: "default", name: "select city" },
@@ -33,7 +33,7 @@ export const LIST = {
     { id: "country-1_state-2_city-2", name: "udaypur" },
     { id: "country-1_state-3_city-1", name: "mumbai" },
     { id: "country-1_state-3_city-2", name: "pune" },
-    { id: "country-2_state-1_city-1", name: "xyz" },
+    { id: "country-2_state-1_city-1", name: "san francisco" },
   ],
   DEFAULT_CITY_LIST: [
     { id: "default", name: "select city" },
