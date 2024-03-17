@@ -24,9 +24,9 @@ const labels = {
 function getLabelText(value) {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 }
-
 const BasicRating = forwardRef((props, ref) => {
   const [value, setValue] = useState(props?.value || props.defaultValue || 0);
+  console.log(value);
   const [hover, setHover] = useState(-1);
   const inputRef = useRef(null);
   useImperativeHandle(ref, () => {

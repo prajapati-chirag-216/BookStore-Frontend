@@ -96,16 +96,19 @@ const cartSlice = createSlice({
     setLoadItemsToCart(state, action) {
       const products = action.payload;
       let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      let updatedCartItems;
+      let updatedCartItems = cartItems;
       if (products.length !== 0) {
         updatedCartItems = products.map((product) => {
           const index = cartItems.findIndex((item) => {
             return item._id === product.product._id;
           });
-          if (index != -1) {
-            cartItems[index].quntity += product.quantity;
+          if (index && index != -1) {
+            cartItems[index].quantity += product.quantity;
           } else {
-            cartItems.push({ ...product.product, quntity: product.quantity });
+            return {
+              ...product.product,
+              quantity: product.quantity,
+            };
           }
         });
       } else {

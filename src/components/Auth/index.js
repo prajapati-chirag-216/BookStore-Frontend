@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { STATUS } from "../../utils/variables";
 import { uiActions } from "../../store/ui-slice";
+
 function Auth() {
   const dispatch = useDispatch();
   const [authPage, setAuthPage] = useState("signup");

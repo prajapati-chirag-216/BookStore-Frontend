@@ -10,7 +10,7 @@ import { uiActions } from "../../../../store/ui-slice";
 import { SNACKBAR_DETAILS, STATUS } from "../../../../utils/variables";
 import { cartActions } from "../../../../store/cart-slice";
 
-function Form(props) {
+function Form() {
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -75,11 +75,11 @@ function Form(props) {
     };
     dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
     try {
-      await loginUser(userData);
+      const { cartItems } = await loginUser(userData);
       navigate("/home");
       dispatch(uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_LOGGED_IN }));
       dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
-      dispatch(cartActions.setAddItem());
+      dispatch(cartActions.setLoadItemsToCart(cartItems));
     } catch (err) {
       dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
       if (err.response?.data?.message.toLowerCase().includes("password")) {

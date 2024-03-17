@@ -8,7 +8,6 @@ import { cartActions } from "../../../store/cart-slice";
 
 function Header({ productDetails }) {
   const dispatch = useDispatch();
-
   const [displayImage, setDisplayImage] = useState(productDetails.images[0]);
   const displayChangeHandler = (img) => {
     setDisplayImage(img);
@@ -58,6 +57,7 @@ function Header({ productDetails }) {
         </div>
         <div className={classes["row-items"]}>
           <div className={classes["rating-container"]}>
+            {/* This is(BasicRating) Not Getting Rerenderd while avgRatings changes when user writes new review */}
             <BasicRating value={productDetails.avgRatings} readOnly={true} />
             <span>{productDetails.reviewedBy}</span>
             <PersonIcon

@@ -90,7 +90,6 @@ function ProductReview(props) {
         setReviews([{ ...myReview, name: "You" }, ...filteredReviews]);
       } else {
         setReviews(ProductReviews);
-        // setIsLoading(false);
       }
       setIsLoading(false);
     });

@@ -5,7 +5,6 @@ import Button from "../../../Button";
 import { nameReducer, descriptionReducer } from "../../../../reducers";
 import BasicRating from "../../../Rating";
 import { addReview } from "../../../../utils/api";
-import { useLocation } from "react-router-dom";
 
 function Form(props) {
   const titleRef = useRef(null);
@@ -69,7 +68,7 @@ function Form(props) {
       rating: ratingRef.current.value,
     };
 
-    const data = await addReview(props.productId, reviewData);
+    await addReview(props.productId, reviewData);
     props.onAddReview();
   };
   return (
@@ -101,7 +100,7 @@ function Form(props) {
         value={messageState.value}
         isValid={messageIsValid}
       />
-      <BasicRating ref={ratingRef} defaultValue="2.5" />
+      <BasicRating ref={ratingRef} defaultValue={2.5} />
       <Button className="btn-large" marginTop="2rem">
         Submit
       </Button>
