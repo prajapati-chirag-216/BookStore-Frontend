@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { uiActions } from "../../../store/ui-slice";
 import { SNACKBAR_DETAILS } from "../../../utils/variables";
 import { useNavigate } from "react-router-dom";
+import Heading from "../../Heading";
 
 function ProductReview(props) {
   const dispatch = useDispatch();
@@ -98,7 +99,7 @@ function ProductReview(props) {
   return (
     <Fragment>
       <div className={classes["review-container"]}>
-        <h1 className="main-heading">Reviews</h1>
+        <Heading title="Reviews" />
         <div className={classes["item-reviews"]}>
           {isLoading && <LoadingSpinner />}
           {!isLoading && reviews.length == 0 && (

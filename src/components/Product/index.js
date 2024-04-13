@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Main from "../Main";
-import { getProductsOfCategory } from "../../utils/api";
+import {
+  fetchProductByName,
+  getProductsOfCategory,
+  sortItems,
+} from "../../utils/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import ProductContent from "../Product/ProductContent";
 import { useDispatch } from "react-redux";
@@ -11,8 +15,11 @@ function Product() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const pathName = location.pathname;
+  const categoryId = pathName.split("/")[2];
 
   const [items, setItems] = useState([]);
+  const [filterdItems, setFilterdItems] = useState([]);
 
   const fetchItemsHandler = async (id) => {
     const data = await getProductsOfCategory(id);
@@ -21,16 +28,29 @@ function Product() {
   const navigateHandler = (id) => {
     navigate("/product/" + id);
   };
-
+  const updateStateHandler = (data) => {
+    setItems(data);
+    setFilterdItems(data);
+  };
   useEffect(() => {
-    const pathName = location.pathname;
-    const id = pathName.split("/")[2];
     dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
-    fetchItemsHandler(id).then((data) => {
-      setItems(data);
+    fetchItemsHandler(categoryId).then((data) => {
+      updateStateHandler(data);
       dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
     });
   }, []);
+
+  const searchChangeHandler = (eve) => {
+    const searchTxt = eve.target.value;
+    const filterdItems = fetchProductByName(searchTxt, items);
+    setFilterdItems(filterdItems);
+  };
+  const sortItemsHandler = async (sortBy) => {
+    dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
+    const sortedItems = await sortItems(categoryId, sortBy);
+    updateStateHandler(sortedItems);
+    dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
+  };
 
   return (
     <div>
@@ -38,7 +58,11 @@ function Product() {
         name="Action Books"
         searchHolder="Search book or author"
         applyFilter={true}
-        gridContent={<ProductContent items={items} onClick={navigateHandler} />}
+        onSearch={searchChangeHandler}
+        onSort={sortItemsHandler}
+        gridContent={
+          <ProductContent items={filterdItems} onClick={navigateHandler} />
+        }
       />
     </div>
   );

@@ -26,9 +26,18 @@ function Header({ productDetails }) {
     };
     dispatch(cartActions.setAddItem(productData));
   };
+  const scrollToReviewsHandler = () => {
+    const productContainer = document.getElementById("product-container");
+    if (productContainer) {
+      window.scrollTo({
+        top: productContainer.offsetHeight + productContainer.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
-    <div className={classes["product-container"]}>
+    <div className={classes["product-container"]} id="product-container">
       <div className={classes["container-display"]}>
         <div className={classes["display-slider"]}>
           {productDetails &&
@@ -58,7 +67,11 @@ function Header({ productDetails }) {
         <div className={classes["row-items"]}>
           <div className={classes["rating-container"]}>
             {/* This is(BasicRating) Not Getting Rerenderd while avgRatings changes when user writes new review */}
-            <BasicRating value={productDetails.avgRatings} readOnly={true} />
+            <BasicRating
+              value={productDetails.avgRatings}
+              readOnly={true}
+              onClick={scrollToReviewsHandler}
+            />
             <span>{productDetails.reviewedBy}</span>
             <PersonIcon
               sx={{ fontSize: "2.2rem", color: "var(--primary-font-color)" }}

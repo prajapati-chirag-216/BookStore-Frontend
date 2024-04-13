@@ -12,7 +12,9 @@ function Layout() {
     <div className={classes["main-container"]}>
       <Cart isOpen={isOpen} onClose={closeCartHandler} />
       <Navigation onOpen={openCartHandler} />
-      <Outlet />
+      <div className={classes["container-content"]}>
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

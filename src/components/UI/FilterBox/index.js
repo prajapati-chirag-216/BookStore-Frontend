@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./index.module.css";
-function FilterBox() {
+function FilterBox(props) {
   return (
     <div className={classes["filter-box"]}>
       <div className={classes["filter-box--selector"]}>
@@ -13,10 +13,17 @@ function FilterBox() {
         <img src="/down-arr.png" alt="" />
       </div>
       <div className={classes["filter-box--value"]}>
-        <li>price High to Low</li>
-        <li>price Low to High</li>
-        <li>Letest</li>
-        <li>Oldest</li>
+        <li onClick={props.onSort.bind(null, "sortByHighPrice")}>
+          price High to Low
+        </li>
+        <li onClick={props.onSort.bind(null, "sortByLowPrice")}>
+          price Low to High
+        </li>
+        <li onClick={props.onSort.bind(null, "sortByNewDate")}>Letest</li>
+        <li onClick={props.onSort.bind(null, "sortByOldDate")}>Oldest</li>
+        <li onClick={props.onSort.bind(null, "sortByPopularity")}>
+          Popularity
+        </li>
       </div>
     </div>
   );

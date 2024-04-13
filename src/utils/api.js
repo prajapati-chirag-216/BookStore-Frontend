@@ -378,3 +378,31 @@ export const getProductReviews = async (id) => {
   const response = await AxiosInstance(config);
   return response;
 };
+
+export const fetchCategoryByName = (name, data) => {
+  const filterdName = name.split(" ").join("").toLowerCase();
+  const filteredData = data.filter((item) => {
+    const itemName = item.name.split(" ").join("").toLowerCase();
+    return itemName.includes(filterdName);
+  });
+
+  return filteredData;
+};
+
+export const fetchProductByName = (name, data) => {
+  const filterdName = name.split(" ").join("").toLowerCase();
+  const filteredData = data.filter((item) => {
+    const itemName = item.bookName.split(" ").join("").toLowerCase();
+    return itemName.includes(filterdName);
+  });
+
+  return filteredData;
+};
+
+export const sortItems = async (id, name) => {
+  const config = {
+    url: `/getfilteredproducts/${id}/${name}`,
+  };
+  const response = await AxiosInstance(config);
+  return response;
+};

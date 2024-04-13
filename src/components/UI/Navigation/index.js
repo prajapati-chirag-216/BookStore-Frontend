@@ -21,6 +21,7 @@ function Navigation(props) {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const qtyStatus = useSelector((state) => state.cart.qtyStatus);
   const [userProfile, setUserProfile] = useState(null);
 
   const changeQuantityHandler = (items) => {
@@ -115,23 +116,9 @@ function Navigation(props) {
       </div>
 
       <div className={classes["container-btns"]}>
-        <div className={classes["btn-icon"]} onClick={openCartHandler}>
-          {totalQuantity > 0 && (
-            <span className={classes["total-qty"]}>{totalQuantity}</span>
-          )}
-          {totalQuantity == 0 ? (
-            <ShoppingCartOutlinedIcon
-              sx={{ fontSize: "4rem", color: "var(--primary-font-color)" }}
-            />
-          ) : (
-            <ShoppingCartIcon
-              sx={{ fontSize: "4rem", color: "var(--primary-font-color)" }}
-            />
-          )}
-        </div>
         <div className={classes["btn-icon"]} onClick={navigateHandler}>
           <AccountCircleIcon
-            sx={{ fontSize: "4rem", color: "var(--primary-font-color)" }}
+            sx={{ fontSize: "4rem", color: "var(--color-white)" }}
           />
           <span className={classes["user-name"]}>
             {userProfile
@@ -139,6 +126,31 @@ function Navigation(props) {
               : "Signup/login"}
           </span>
         </div>
+      </div>
+      <div
+        className={`${classes["btn-icon"]} ${classes["icon-float"]} ${
+          qtyStatus.status ? classes["bump"] : ""
+        }`}
+        onClick={openCartHandler}
+      >
+        <span className={classes["total-qty"]}>{totalQuantity}</span>
+        {totalQuantity == 0 ? (
+          <ShoppingCartOutlinedIcon
+            sx={{
+              fontSize: "4rem",
+              color: "var(--color-white)",
+              marginTop: "1.8rem",
+            }}
+          />
+        ) : (
+          <ShoppingCartIcon
+            sx={{
+              fontSize: "4rem",
+              color: "var(--color-white)",
+              marginTop: "1.8rem",
+            }}
+          />
+        )}
       </div>
     </div>
   );

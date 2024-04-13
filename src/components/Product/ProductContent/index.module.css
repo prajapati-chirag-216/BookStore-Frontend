@@ -41,7 +41,7 @@
     font-size: 2rem;
     background-color: #0005;
     border-radius: 50%;
-    z-index: 1000;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
