@@ -42,8 +42,8 @@ function Form(props) {
             onClick={optionChange.bind(null, METHOD_OPTIONS.COD)}
           />
           <h1 className={classes["form-label"]}>
-            Cash on Delivery : COD handling No charges for now, This shipping
-            option is eligible for Cash on Delivery.
+            {METHOD_OPTIONS.COD} : COD handling No charges for now, This
+            shipping option is eligible for {METHOD_OPTIONS.COD}.
           </h1>
           <span className={classes["form-price"]}>Free</span>
         </div>

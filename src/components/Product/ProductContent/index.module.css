@@ -38,7 +38,7 @@
     right: -1.5rem;
     width: 4rem;
     height: 4rem;
-    font-size: 2rem;
+    font-size: var(--medium-font-size);
     background-color: #0005;
     border-radius: 50%;
     z-index: 100;

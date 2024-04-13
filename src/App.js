@@ -46,8 +46,6 @@ const router = createBrowserRouter(
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/checkout/shipping" element={<Shipping />} />
         <Route
           element={<ProtectedRoutes isProfilePage={true} />}
           loader={profileLoader}

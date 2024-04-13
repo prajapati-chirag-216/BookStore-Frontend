@@ -74,7 +74,7 @@
 
 .item-name {
     color: rgb(80, 80, 80);
-    font-size: 2rem;
+    font-size: var(--medium-font-size);
     letter-spacing: 1px;
     line-height: 0;
     text-transform: capitalize;

@@ -111,6 +111,6 @@
 
 .description-label {
     display: block;
-    font-size: 2rem;
+    font-size: var(--medium-font-size);
     font-weight: 500;
 }

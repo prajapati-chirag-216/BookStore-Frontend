@@ -49,7 +49,6 @@ export const LIST = {
 };
 
 export const METHOD_OPTIONS = {
-  DEFAULT: "Online",
   ONLINE: "Online",
   COD: "Cash On Delivery",
 };

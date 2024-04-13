@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./index.module.css";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import Form from "./Form";
+import { useSelector } from "react-redux";
 function Shipping() {
   const props = useOutletContext();
+  const orderInfo = useSelector((store) => store.order.orderInfo);
 
   const navigate = useNavigate();
   const navigateHandler = () => {
@@ -19,7 +21,9 @@ function Shipping() {
       <div className={classes["details-container"]}>
         <div className={classes["details-content"]}>
           <label className={classes["content-label"]}>Contact</label>
-          <h1 className={classes["content-text"]}>chirag@gmail.com</h1>
+          <h1 className={classes["content-text"]}>
+            {orderInfo?.contactInformation?.phoneNo || "-"}
+          </h1>
           <span className={classes["content-link"]} onClick={navigateHandler}>
             Change
           </span>
@@ -28,7 +32,7 @@ function Shipping() {
         <div className={classes["details-content"]}>
           <label className={classes["content-label"]}>Ship to</label>
           <h1 className={classes["content-text"]}>
-            c/4 ratndeep socity isanpur
+            {orderInfo?.shippingAddress?.address || "-"}
           </h1>
           <span className={classes["content-link"]} onClick={navigateHandler}>
             Change

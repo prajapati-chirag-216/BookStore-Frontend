@@ -1,7 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import classes from "./index.module.css";
 import Stepper from "../../../Checkout/Stepper";
-import { STATUS, STEP_LABELS_ORDER_STATUS } from "../../../../utils/variables";
+import {
+  METHOD_OPTIONS,
+  STATUS,
+  STEP_LABELS_ORDER_STATUS,
+} from "../../../../utils/variables";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import DoorBackIcon from "@mui/icons-material/DoorBack";
@@ -114,7 +118,13 @@ function OrderStatus(props) {
                 </div>
                 <div className={classes["summary-info"]}>
                   <h1>Delivary Charges</h1>
-                  <h1>free</h1>
+                  <h1>
+                    {orderData.shippingMethod == METHOD_OPTIONS.ONLINE ? (
+                      "Free"
+                    ) : (
+                      <span>&#8377; 49 </span>
+                    )}
+                  </h1>
                 </div>
                 <div className={classes["summary-info"]}>
                   <h1>SubTotal</h1>
@@ -126,7 +136,12 @@ function OrderStatus(props) {
                 </div>
                 <div className={classes["summary-total"]}>
                   <h1>Grand Total</h1>
-                  <h1>&#8377; {orderData.totalPrice}</h1>
+                  <h1>
+                    &#8377;{" "}
+                    {orderData.shippingMethod == METHOD_OPTIONS.ONLINE
+                      ? orderData.totalPrice
+                      : orderData.totalPrice + 49}
+                  </h1>
                 </div>
               </div>
             </div>

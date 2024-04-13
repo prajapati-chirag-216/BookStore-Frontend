@@ -16,7 +16,7 @@
 
 .overlay-text {
     margin: 20rem auto;
-    font-size: 2rem;
+    font-size: var(--medium-font-size);
     text-align: center;
     color: rgb(177, 177, 177);
     letter-spacing: 1px;
