@@ -5,7 +5,7 @@ import Button from "../../../Button";
 import { METHOD_OPTIONS } from "../../../../utils/variables";
 
 function Form(props) {
-  const [selectedOption, setSelectedOption] = useState(METHOD_OPTIONS.DEFAULT);
+  const [selectedOption, setSelectedOption] = useState(METHOD_OPTIONS.ONLINE);
   const optionChange = (value) => {
     setSelectedOption(value);
   };

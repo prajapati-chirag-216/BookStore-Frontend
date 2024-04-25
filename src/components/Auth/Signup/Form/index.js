@@ -8,7 +8,11 @@ import {
   passwordReducer,
 } from "../../../../reducers";
 import { signupUser } from "../../../../utils/api";
-import { SNACKBAR_DETAILS, STATUS } from "../../../../utils/variables";
+import {
+  SNACKBAR_DETAILS,
+  STATUS,
+  VALIDATION_MESSAGES,
+} from "../../../../utils/variables";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../../../store/ui-slice";
 import { useNavigate } from "react-router-dom";
@@ -121,6 +125,11 @@ function Form(props) {
       onSubmit={formIsValid ? submitFormHandler : validateFormHandler}
       method="post"
     >
+      {nameIsValid == false && (
+        <span className={classes["invalid-txt"]}>
+          {VALIDATION_MESSAGES.NAME}
+        </span>
+      )}
       <Input
         ref={nameRef}
         type="text"
@@ -131,6 +140,11 @@ function Form(props) {
         value={nameState.value}
         isValid={nameIsValid}
       />
+      {emailIsValid == false && (
+        <span className={classes["invalid-txt"]}>
+          {VALIDATION_MESSAGES.EMAIL}
+        </span>
+      )}
       <Input
         ref={emailRef}
         type="text"
@@ -141,6 +155,11 @@ function Form(props) {
         value={emailState.value}
         isValid={emailIsValid}
       />
+      {passwordIsValid == false && (
+        <span className={classes["invalid-txt"]}>
+          {VALIDATION_MESSAGES.PASSWORD}
+        </span>
+      )}
       <Input
         ref={passwordRef}
         type="password"

@@ -183,7 +183,14 @@ export const updateCategory = async (id, categoryData) => {
 export const getAllCategories = async () => {
   const config = {
     url: `/getAllCategories`,
-    withCredentials: true,
+  };
+  const response = await AxiosInstance(config);
+  return response;
+};
+
+export const getCategory = async (id) => {
+  const config = {
+    url: `/fetchCategory/${id}`,
   };
   const response = await AxiosInstance(config);
   return response;
@@ -379,7 +386,7 @@ export const getProductReviews = async (id) => {
   return response;
 };
 
-export const fetchCategoryByName = (name, data) => {
+export const filterCategoriesByName = (name, data) => {
   const filterdName = name.split(" ").join("").toLowerCase();
   const filteredData = data.filter((item) => {
     const itemName = item.name.split(" ").join("").toLowerCase();

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import classes from "./index.module.css";
 import Header from "./Header";
 import Main from "../Main";
-import { fetchCategoryByName, getAllCategories } from "../../utils/api";
+import { filterCategoriesByName, getAllCategories } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import CategoryContent from "../Home/CategoryContent";
 
@@ -30,7 +30,7 @@ function Home() {
 
   const searchChangeHandler = (eve) => {
     const searchTxt = eve.target.value;
-    const filterdItems = fetchCategoryByName(searchTxt, items);
+    const filterdItems = filterCategoriesByName(searchTxt, items);
     setFilterdItems(filterdItems);
   };
 

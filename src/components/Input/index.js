@@ -51,9 +51,9 @@ const Input = forwardRef((props, ref) => {
     <div className={classes["form-group"]}>
       {props.type == "password" &&
         (passIsVisible ? (
-          <VisibilityOffIcon onClick={changePassVisibility} />
-        ) : (
           <VisibilityIcon onClick={changePassVisibility} />
+        ) : (
+          <VisibilityOffIcon onClick={changePassVisibility} />
         ))}
       <input
         className={`${classes["input"]} ${

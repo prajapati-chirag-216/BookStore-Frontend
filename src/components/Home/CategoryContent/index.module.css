@@ -1,36 +1,50 @@
 .item-container {
-    position: relative;
-    color: var(--color-white);
-    cursor: pointer;
-    overflow: hidden;
-    border-radius: 5px;
-    box-shadow: 0px 4px 10px rgba(157, 157, 157, 0.514)
+  position: relative;
+  color: var(--color-white);
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(157, 157, 157, 0.514);
 }
 
 .item-container::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to bottom, transparent 50%, #0002);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, transparent 50%, #0002);
 }
 
 .item-img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .item-name {
-    position: absolute;
-    bottom: 0;
-    right: 5rem;
-    font-size: 4.5rem;
-    z-index: 100;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: end;
-    hyphens: auto;
+  position: absolute;
+  bottom: 0;
+  right: 5rem;
+  font-size: 4.5rem;
+  z-index: 100;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: end;
+  hyphens: auto;
+}
+
+.item-quantity {
+  position: absolute;
+  top: -1.5rem;
+  right: -1.5rem;
+  width: 4rem;
+  height: 4rem;
+  font-size: var(--medium-font-size);
+  background-color: #0005;
+  border-radius: 50%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

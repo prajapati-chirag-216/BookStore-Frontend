@@ -111,7 +111,7 @@ function Cart(props) {
         disabled={cartItems.length <= 0}
         onClick={navigateHandler}
       >
-        Checkoute
+        Checkout
       </Button>
     </div>
   );

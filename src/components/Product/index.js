@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Main from "../Main";
 import {
   fetchProductByName,
+  getCategory,
   getProductsOfCategory,
   sortItems,
 } from "../../utils/api";
@@ -20,6 +21,7 @@ function Product() {
 
   const [items, setItems] = useState([]);
   const [filterdItems, setFilterdItems] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
 
   const fetchItemsHandler = async (id) => {
     const data = await getProductsOfCategory(id);
@@ -34,6 +36,9 @@ function Product() {
   };
   useEffect(() => {
     dispatch(uiActions.setIsLoadingBar({ status: STATUS.LOAD }));
+    getCategory(categoryId).then((data) => {
+      setCategoryName(data.name);
+    });
     fetchItemsHandler(categoryId).then((data) => {
       updateStateHandler(data);
       dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
@@ -55,8 +60,8 @@ function Product() {
   return (
     <div>
       <Main
-        name="Action Books"
-        searchHolder="Search book or author"
+        name={categoryName}
+        searchHolder="Search book"
         applyFilter={true}
         onSearch={searchChangeHandler}
         onSort={sortItemsHandler}

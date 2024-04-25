@@ -5,6 +5,7 @@ import Button from "../../../Button";
 import { nameReducer, descriptionReducer } from "../../../../reducers";
 import BasicRating from "../../../Rating";
 import { addReview } from "../../../../utils/api";
+import { VALIDATION_MESSAGES } from "../../../../utils/variables";
 
 function Form(props) {
   const titleRef = useRef(null);
@@ -77,6 +78,11 @@ function Form(props) {
       onSubmit={formIsValid ? submitFormHandler : validateFormHandler}
       method="post"
     >
+      {titleIsValid == false && (
+        <span className={classes["invalid-txt"]}>
+          {VALIDATION_MESSAGES.NAME}
+        </span>
+      )}
       <Input
         ref={titleRef}
         type="text"
@@ -87,6 +93,11 @@ function Form(props) {
         value={titleState.value}
         isValid={titleIsValid}
       />
+      {messageIsValid == false && (
+        <span className={classes["invalid-txt"]}>
+          {VALIDATION_MESSAGES.DESCRIPTION}
+        </span>
+      )}
       <Input
         ref={messageRef}
         type="textarea"

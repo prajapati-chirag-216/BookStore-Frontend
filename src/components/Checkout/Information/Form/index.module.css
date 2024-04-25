@@ -58,3 +58,7 @@
     align-items: center;
     cursor: pointer;
 }
+.invalid-txt {
+    font-size: 1.5rem;
+    color: orangered;
+  }

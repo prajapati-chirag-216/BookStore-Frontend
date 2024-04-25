@@ -7,6 +7,8 @@ const PROFILE_MENUS = [{ label: "Order History", icon: <HistoryIcon /> }];
 
 function Slider() {
   const navigate = useNavigate();
+
+  // if we have multiple menus setActiveMenu will be used in future
   const [activeMenu, setActiveMenu] = useState(0);
   const navigateHandler = () => {
     navigate("/myProfile");

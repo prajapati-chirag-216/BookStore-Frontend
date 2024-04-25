@@ -62,7 +62,7 @@ function OrderHistory() {
             stay updated with your orders track your status
           </h2>
         </div>
-        <Button className="btn-small" width="20rem" onClick={logoutHandler}>
+        <Button className="btn-small" width="18rem" onClick={logoutHandler}>
           Logout
         </Button>
       </div>

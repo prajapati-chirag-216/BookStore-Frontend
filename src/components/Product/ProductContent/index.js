@@ -60,16 +60,17 @@ function ProductContent(props) {
                 <h1>Not Avilable</h1>
               </div>
             )}
-
-            <span
-              className={`${classes["item-quantity"]} ${
-                qtyStatus.status && qtyStatus.id == item._id
-                  ? classes["bump"]
-                  : ""
-              }`}
-            >
-              {item.quantity}
-            </span>
+            {item.status.toLowerCase() == "available" && item.quantity > 0 && (
+              <span
+                className={`${classes["item-quantity"]} ${
+                  qtyStatus.status && qtyStatus.id == item._id
+                    ? classes["bump"]
+                    : ""
+                }`}
+              >
+                {item.quantity}
+              </span>
+            )}
 
             <div
               className={classes["image-container"]}

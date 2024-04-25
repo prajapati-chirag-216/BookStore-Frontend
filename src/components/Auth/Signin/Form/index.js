@@ -7,7 +7,11 @@ import { loginUser } from "../../../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../../../store/ui-slice";
-import { SNACKBAR_DETAILS, STATUS } from "../../../../utils/variables";
+import {
+  SNACKBAR_DETAILS,
+  STATUS,
+  VALIDATION_MESSAGES,
+} from "../../../../utils/variables";
 import { cartActions } from "../../../../store/cart-slice";
 
 function Form() {
@@ -96,6 +100,11 @@ function Form() {
       onSubmit={formIsValid ? submitFormHandler : validateFormHandler}
       method="post"
     >
+      {emailIsValid == false && (
+        <span className={classes["invalid-txt"]}>
+          {VALIDATION_MESSAGES.EMAIL}
+        </span>
+      )}
       <Input
         ref={emailRef}
         type="text"
@@ -106,6 +115,12 @@ function Form() {
         value={emailState.value}
         isValid={emailIsValid}
       />
+
+      {passwordIsValid == false && (
+        <span className={classes["invalid-txt"]}>
+          {VALIDATION_MESSAGES.PASSWORD}
+        </span>
+      )}
       <Input
         ref={passwordRef}
         type="password"
@@ -118,7 +133,7 @@ function Form() {
         isValid={passwordIsValid}
       />
       <Button className="btn-small" marginTop="2rem">
-        SignIn
+        Sign in
       </Button>
     </form>
   );
