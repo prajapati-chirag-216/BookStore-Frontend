@@ -61,7 +61,7 @@ function Product() {
     <div>
       <Main
         name={categoryName}
-        searchHolder="Search book"
+        searchHolder="Search book name"
         applyFilter={true}
         onSearch={searchChangeHandler}
         onSort={sortItemsHandler}
