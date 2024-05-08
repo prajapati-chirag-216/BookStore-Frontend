@@ -124,16 +124,16 @@ export const STEP_LABELS_CHECKOUT = ["Information", "Shipping", "Payment"];
 export const STEP_LABELS_ORDER_STATUS = ["Pending", "Shipped", "Reaching"];
 
 export const VALIDATION_MESSAGES = {
-  NAME: "Name should be between 6 and 30 characters and should not start with a number.",
-  EMAIL: "Please enter a valid email address.",
-  PASSWORD:
-    "Password length should be between 6 and 10 characters and should not contain 'password'.",
-  PHONENO: "Please enter a valid phone number.",
-  NUMBER: "Please enter a valid number greater than 0.",
-  GENERAL: "Please enter a value between 6 and 300 characters.",
-  PINCODE: "Please enter a valid 6-digit PIN code.",
-  CARDNO: "Please enter a valid 14-digit card number.",
-  CVV: "CVV should be between 3 and 4 digits.",
-  EXPIRYDATE: "Please enter a valid expiry date.",
-  DESCRIPTION: "Description should be between 40 and 400 characters.",
+  NAME: "Name: 5-30 characters, cannot start with a number.",
+  EMAIL: "Enter a valid email address.",
+  PASSWORD: "Password: 6-10 characters, avoid 'password'.",
+  PHONENO: "Enter a valid phone number.",
+  NUMBER: "Enter a valid number > 0.",
+  GENERAL: "Enter 6-300 characters.",
+  PINCODE: "Enter a valid 6-digit PIN code.",
+  CARDNO: "Enter a valid 14-digit card number.",
+  CVV: "CVV: 3-4 digits.",
+  EXPIRYDATE: "Enter a valid expiry date.",
+  DESCRIPTION: "Description: 40-400 characters.",
+  IMAGE: "Image is required (jpeg,png,jpg)",
 };

@@ -69,7 +69,6 @@ const Checkout = () => {
         );
         dispatch(uiActions.setIsLoadingBar({ status: STATUS.COMPLETE }));
       } catch (err) {
-        console.log("errors -> ", err);
         if (err?.response?.status == 404) {
           dispatch(
             uiActions.setSnackBar({ ...SNACKBAR_DETAILS.ON_NOT_AVAILABLE })

@@ -265,23 +265,25 @@ function Form(props) {
         className={`${classes["info-container"]} ${classes["shipping-info-container"]}`}
       >
         <h1 className={classes["container-heading"]}>Shipping Information</h1>
-        {/* This is just for validations added here other wise it will push specific input tag to down */}
-        <div className={classes["row-inp"]}>
-          <div>
-            {firstNameIsValid == false && (
-              <span className={classes["invalid-txt"]}>
-                {VALIDATION_MESSAGES.NAME}
-              </span>
-            )}
+        {/* This is just for validations, added here other wise it will push specific input tag to down */}
+        {(firstNameIsValid == false || lastNameIsValid == false) && (
+          <div className={classes["row-inp"]}>
+            <div>
+              {firstNameIsValid == false && (
+                <span className={classes["invalid-txt"]}>
+                  {VALIDATION_MESSAGES.NAME}
+                </span>
+              )}
+            </div>
+            <div>
+              {lastNameIsValid == false && (
+                <span className={classes["invalid-txt"]}>
+                  {VALIDATION_MESSAGES.NAME}
+                </span>
+              )}
+            </div>
           </div>
-          <div>
-            {lastNameIsValid == false && (
-              <span className={classes["invalid-txt"]}>
-                {VALIDATION_MESSAGES.NAME}
-              </span>
-            )}
-          </div>
-        </div>
+        )}
         <div className={classes["row-inp"]}>
           <Input
             ref={firstNameRef}
@@ -304,23 +306,25 @@ function Form(props) {
             isValid={lastNameIsValid}
           />
         </div>
-        {/* This is just for validations added here other wise it will push specific input tag to down */}
-        <div className={`${classes["row-inp"]} ${classes["row-inp_2-3"]}`}>
-          <div>
-            {addressIsValid == false && (
-              <span className={classes["invalid-txt"]}>
-                {VALIDATION_MESSAGES.GENERAL}
-              </span>
-            )}
+        {/* This is just for validations, added here other wise it will push specific input tag to down */}
+        {(addressIsValid == false || pinCodeIsValid == false) && (
+          <div className={`${classes["row-inp"]} ${classes["row-inp_2-3"]}`}>
+            <div>
+              {addressIsValid == false && (
+                <span className={classes["invalid-txt"]}>
+                  {VALIDATION_MESSAGES.GENERAL}
+                </span>
+              )}
+            </div>
+            <div>
+              {pinCodeIsValid == false && (
+                <span className={classes["invalid-txt"]}>
+                  {VALIDATION_MESSAGES.PINCODE}
+                </span>
+              )}
+            </div>
           </div>
-          <div>
-            {pinCodeIsValid == false && (
-              <span className={classes["invalid-txt"]}>
-                {VALIDATION_MESSAGES.PINCODE}
-              </span>
-            )}
-          </div>
-        </div>
+        )}
         <div className={`${classes["row-inp"]} ${classes["row-inp_2-3"]}`}>
           <Input
             ref={addressRef}
