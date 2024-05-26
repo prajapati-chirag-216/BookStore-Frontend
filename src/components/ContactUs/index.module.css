@@ -13,6 +13,6 @@
 
 .heading-tertiary {
   font-size: var(--large-font-size);
-  color: var(--primary-font-color);
+  color: var(--tertiary-font-color);
   text-align: center;
 }

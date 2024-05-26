@@ -4,7 +4,7 @@ function About() {
   return (
     <div className={classes["contact-container"]}>
       <img
-        src="/book-img.png"
+        src="/book-img-light.png"
         alt="try again"
         className={classes["book-img"]}
       />
