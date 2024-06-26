@@ -8,7 +8,9 @@ import { SNACKBAR_DETAILS } from "../../../utils/variables";
 
 function ProductContent(props) {
   const dispatch = useDispatch();
-  const qtyStatus = useSelector((state) => state.cart.qtyStatus);
+
+  // we can uncomment this to show user available quantities for now it's not in requirment
+  // const qtyStatus = useSelector((state) => state.cart.qtyStatus);
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const [remainingItems, setRemainingItems] = useState([]);
@@ -46,26 +48,23 @@ function ProductContent(props) {
     <Fragment>
       {remainingItems?.length > 0 ? (
         remainingItems.map((item) => {
-          const isItemAvailable =
-            item.status.toLowerCase() == "not-available" || item.quantity == 0;
+          const isNotAvailable = item.status.toLowerCase() == "not-available";
           return (
             <div
               key={item._id}
               className={`${classes["item-container"]} ${
-                item.status.toLowerCase() == "not-available" ||
-                item.quantity <= 0
+                isNotAvailable || item.quantity <= 0
                   ? classes["item-container--disable"]
                   : ""
               }`}
             >
-              {(item.status.toLowerCase() == "not-available" ||
-                item.quantity <= 0) && (
+              {(isNotAvailable || item.quantity <= 0) && (
                 <div className={classes["not-avilable"]}>
                   <h1>Not Avilable</h1>
                 </div>
               )}
-              {/* we can unComment this to so quantity of book */}
-              {/* {!isItemAvailable && (
+              {/* we can uncomment this to show user available quantities for now it's not in requirment */}
+              {/* {!isNotAvailable && item.quantity > 0 && (
                 <span
                   className={`${classes["item-quantity"]} ${
                     qtyStatus.status && qtyStatus.id == item._id
@@ -76,6 +75,7 @@ function ProductContent(props) {
                   {item.quantity}
                 </span>
               )} */}
+
               <div
                 className={classes["image-container"]}
                 style={{
@@ -101,7 +101,7 @@ function ProductContent(props) {
               <div className={classes["item-ctrl"]}>
                 <span
                   className={`${classes["item-price"]} ${
-                    isItemAvailable ? classes["item-price--disable"] : ""
+                    isNotAvailable ? classes["item-price--disable"] : ""
                   }`}
                 >
                   {item.price} &#8377;
@@ -110,7 +110,7 @@ function ProductContent(props) {
                   className="btn-large"
                   color="var(--primary-font-color)"
                   onClick={addToCartHandler.bind(null, item)}
-                  disabled={isItemAvailable}
+                  disabled={isNotAvailable}
                 >
                   Add To Cart
                 </Button>
