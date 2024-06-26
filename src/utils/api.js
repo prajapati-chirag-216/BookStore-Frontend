@@ -406,9 +406,27 @@ export const fetchProductByName = (name, data) => {
   return filteredData;
 };
 
-export const sortItems = async (id, name) => {
+export const fetchFilteredItems = async (
+  id,
+  windowSize,
+  skip,
+  sortBy,
+  searchTxt = "all"
+) => {
   const config = {
-    url: `/getfilteredproducts/${id}/${name}`,
+    url: `/getfilteredproducts/${id}/${windowSize}/${skip}/${sortBy}/${searchTxt}`,
+  };
+  const response = await AxiosInstance(config);
+  return response;
+};
+
+export const fetchFilteredCategories = async (
+  windowSize,
+  skip,
+  searchTxt = "all"
+) => {
+  const config = {
+    url: `/getfilteredcategories/${windowSize}/${skip}/${searchTxt}`,
   };
   const response = await AxiosInstance(config);
   return response;

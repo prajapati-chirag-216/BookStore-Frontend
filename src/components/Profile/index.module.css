@@ -6,7 +6,7 @@
 }
 
 .container-left {
-  width: 20rem;
+  min-width: 20rem;
   height: 100%;
   background-color: #0001;
   border-right: 1px solid var(--tertiary-font-color);

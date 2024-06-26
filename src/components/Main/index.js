@@ -3,7 +3,6 @@ import SearchBox from "../UI/SearchBox";
 import FilterBox from "../UI/FilterBox";
 import classes from "./index.module.css";
 import Grid from "../Grid";
-import LoadingSpinner from "../UI/LoadingSpinner";
 import Heading from "../Heading";
 
 function Main(props) {
@@ -14,7 +13,7 @@ function Main(props) {
         <SearchBox placeHolder={props.searchHolder} onSearch={props.onSearch} />
         {props.applyFilter && <FilterBox onSort={props.onSort} />}
       </div>
-      {props?.isLoading ? <LoadingSpinner /> : <Grid>{props.gridContent}</Grid>}
+      <Grid>{props.gridContent}</Grid>
     </div>
   );
 }

@@ -80,7 +80,7 @@ function Form(props) {
     >
       {titleIsValid == false && (
         <span className={classes["invalid-txt"]}>
-          {VALIDATION_MESSAGES.NAME}
+          {VALIDATION_MESSAGES.TITLE}
         </span>
       )}
       <Input
@@ -95,7 +95,7 @@ function Form(props) {
       />
       {messageIsValid == false && (
         <span className={classes["invalid-txt"]}>
-          {VALIDATION_MESSAGES.DESCRIPTION}
+          {VALIDATION_MESSAGES.MESSAGE}
         </span>
       )}
       <Input

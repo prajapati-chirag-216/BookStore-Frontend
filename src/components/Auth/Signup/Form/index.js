@@ -172,7 +172,7 @@ function Form(props) {
         isValid={passwordIsValid}
       />
       <Button className="btn-small" marginTop="2rem">
-        SignUp
+        Sign Up
       </Button>
     </form>
   );

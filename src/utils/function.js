@@ -12,31 +12,6 @@ export const genrateAccessToken = async () => {
   return response;
 };
 
-export const textFeildStyle = (feildIsValid) => {
-  return {
-    "& .MuiInputLabel-root.Mui-focused": {
-      color:
-        feildIsValid === false
-          ? "internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133))"
-          : "black",
-    },
-    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor:
-        feildIsValid === false
-          ? "internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133))"
-          : "black",
-    },
-    "& .MuiInputLabel-root": {
-      color:
-        feildIsValid === false
-          ? "internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133))"
-          : "gray",
-      letterSpacing: "0.5px",
-      fontSize: "1.6rem",
-    },
-    fontSize: "1.6rem",
-  };
-};
 export const uploadToCloud = async (image) => {
   const formData = new FormData();
   formData.append("file", image);

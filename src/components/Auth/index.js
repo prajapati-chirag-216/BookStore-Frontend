@@ -29,7 +29,7 @@ function Auth() {
             {authPage === "signup" ? "Already" : "Don't"} have an Account?{" "}
           </h2>
           <h2 onClick={authChangeHandler} className={classes["overlay-link"]}>
-            {authPage === "signup" ? "Signin" : "Signup"}
+            {authPage === "signup" ? "Sign in" : "Sign up"}
           </h2>
         </div>
       </motion.div>

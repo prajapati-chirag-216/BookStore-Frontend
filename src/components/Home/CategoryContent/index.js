@@ -10,9 +10,6 @@ function CategoryContent(props) {
             key={item._id}
             onClick={props.onClick.bind(null, item._id)}
           >
-            <span className={classes["item-quantity"]}>
-              {item.productCount}
-            </span>
             <img className={classes["item-img"]} src={item?.image} alt="img" />
             <h1 className={classes["item-name"]}>{item.name}</h1>
           </div>

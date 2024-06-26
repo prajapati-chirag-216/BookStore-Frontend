@@ -3,6 +3,7 @@ import {
   Await,
   Navigate,
   Outlet,
+  redirect,
   useLoaderData,
   useNavigate,
 } from "react-router-dom";

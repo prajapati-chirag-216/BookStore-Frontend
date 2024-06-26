@@ -124,7 +124,8 @@ export const STEP_LABELS_CHECKOUT = ["Information", "Shipping", "Payment"];
 export const STEP_LABELS_ORDER_STATUS = ["Pending", "Shipped", "Reaching"];
 
 export const VALIDATION_MESSAGES = {
-  NAME: "Name: 5-30 characters, cannot start with a number.",
+  NAME: "Name: 5-30 characters, cannot contain numbers.",
+  TITLE: "Title: 5-30 characters, cannot contain numbers.",
   EMAIL: "Enter a valid email address.",
   PASSWORD: "Password: 6-10 characters, avoid 'password'.",
   PHONENO: "Enter a valid phone number.",
@@ -135,5 +136,8 @@ export const VALIDATION_MESSAGES = {
   CVV: "CVV: 3-4 digits.",
   EXPIRYDATE: "Enter a valid expiry date.",
   DESCRIPTION: "Description: 40-400 characters.",
+  MESSAGE: "Message: 40-400 characters.",
   IMAGE: "Image is required (jpeg,png,jpg)",
 };
+
+export const WINDOW_SIZE = 10;

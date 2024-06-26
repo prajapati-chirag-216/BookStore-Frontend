@@ -1,22 +1,22 @@
 import { formateData, formateDate } from "../utils/function";
 
 export const nameReducer = (state, action) => {
-  let newVal, startsWithNumber;
+  let newVal, containsNumber;
 
-  if (action.value !== undefined) {
-    newVal = action.value;
-    newVal = newVal.replace(/[^a-zA-Z0-9\s]+/g, "");
-    startsWithNumber = /^\d/.test(newVal);
+  if (action.value !== undefined || action.type === "INPUT_BLUR") {
+    newVal = action.type === "INPUT_BLUR" ? state.value : action.value;
+    containsNumber = /\d/.test(newVal); // Check if newVal contains any digits
   }
+
   if (action.type === "INPUT_FETCH") {
     return {
       value: newVal,
       isValid:
-        newVal.trim().length == 0
+        newVal.trim().length === 0
           ? null
           : newVal.trim().length > 5 &&
             newVal.trim().length <= 30 &&
-            !startsWithNumber,
+            !containsNumber,
     };
   }
   if (action.type === "USER_INPUT") {
@@ -25,50 +25,20 @@ export const nameReducer = (state, action) => {
       isValid:
         newVal.trim().length > 5 &&
         newVal.trim().length <= 30 &&
-        !startsWithNumber,
+        !containsNumber,
     };
   }
   if (action.type === "INPUT_BLUR") {
-    startsWithNumber = /^\d/.test(state.value.trim());
     return {
       value: state.value.trim(),
       isValid:
         state.value.trim().length > 5 &&
         state.value.trim().length <= 30 &&
-        !startsWithNumber,
+        !containsNumber,
     };
   }
   return { value: "", isValid: null };
 };
-
-// export const emailReducer = (state, action) => {
-//   if (action.type === "INPUT_FETCH") {
-//     return {
-//       value: action.value.trim(),
-//       isValid:
-//         action.value.trim().length == 0
-//           ? null
-//           : action.value.trim().includes("@"),
-//     };
-//   }
-//   if (action.type === "USER_INPUT") {
-//     return {
-//       value: action.value.trim(),
-//       isValid:
-//         action.value.trim().includes("@") &&
-//         action.value.trim().endsWith("gmail.com"),
-//     };
-//   }
-//   if (action.type === "INPUT_BLUR") {
-//     return {
-//       value: state.value.trim(),
-//       isValid:
-//         state.value.trim().includes("@") &&
-//         state.value.trim().endsWith("gmail.com"),
-//     };
-//   }
-//   return { value: "", isValid: null };
-// };
 
 const validateEmail = (email) => {
   // Regular expression to validate email formats

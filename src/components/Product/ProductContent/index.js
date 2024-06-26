@@ -45,76 +45,79 @@ function ProductContent(props) {
   return (
     <Fragment>
       {remainingItems?.length > 0 ? (
-        remainingItems.map((item) => (
-          <div
-            key={item._id}
-            className={`${classes["item-container"]} ${
-              item.status.toLowerCase() == "not-available" || item.quantity <= 0
-                ? classes["item-container--disable"]
-                : ""
-            }`}
-          >
-            {(item.status.toLowerCase() == "not-available" ||
-              item.quantity <= 0) && (
-              <div className={classes["not-avilable"]}>
-                <h1>Not Avilable</h1>
-              </div>
-            )}
-            {item.status.toLowerCase() == "available" && item.quantity > 0 && (
-              <span
-                className={`${classes["item-quantity"]} ${
-                  qtyStatus.status && qtyStatus.id == item._id
-                    ? classes["bump"]
-                    : ""
-                }`}
-              >
-                {item.quantity}
-              </span>
-            )}
-
+        remainingItems.map((item) => {
+          const isItemAvailable =
+            item.status.toLowerCase() == "not-available" || item.quantity == 0;
+          return (
             <div
-              className={classes["image-container"]}
-              style={{
-                cursor:
-                  item.status.toLowerCase() == "available"
-                    ? "pointer"
-                    : "normal",
-              }}
-              onClick={
-                item.status.toLowerCase() == "available"
-                  ? props.onClick.bind(null, item._id)
-                  : () => {}
-              }
+              key={item._id}
+              className={`${classes["item-container"]} ${
+                item.status.toLowerCase() == "not-available" ||
+                item.quantity <= 0
+                  ? classes["item-container--disable"]
+                  : ""
+              }`}
             >
-              <img
-                className={classes["item-img"]}
-                src={item.images[0]}
-                alt="img"
-              />
-              <h1 className={classes["item-author"]}>- {item.authorName}</h1>
-              <h1 className={classes["item-name"]}>{item.bookName}</h1>
-            </div>
-            <div className={classes["item-ctrl"]}>
-              <span
-                className={`${classes["item-price"]} ${
-                  item.status.toLowerCase() == "not-available"
-                    ? classes["item-price--disable"]
-                    : ""
-                }`}
+              {(item.status.toLowerCase() == "not-available" ||
+                item.quantity <= 0) && (
+                <div className={classes["not-avilable"]}>
+                  <h1>Not Avilable</h1>
+                </div>
+              )}
+              {/* we can unComment this to so quantity of book */}
+              {/* {!isItemAvailable && (
+                <span
+                  className={`${classes["item-quantity"]} ${
+                    qtyStatus.status && qtyStatus.id == item._id
+                      ? classes["bump"]
+                      : ""
+                  }`}
+                >
+                  {item.quantity}
+                </span>
+              )} */}
+              <div
+                className={classes["image-container"]}
+                style={{
+                  cursor:
+                    item.status.toLowerCase() == "available"
+                      ? "pointer"
+                      : "normal",
+                }}
+                onClick={
+                  item.status.toLowerCase() == "available"
+                    ? props.onClick.bind(null, item._id)
+                    : () => {}
+                }
               >
-                {item.price} &#8377;
-              </span>
-              <Button
-                className="btn-large"
-                color="var(--primary-font-color)"
-                onClick={addToCartHandler.bind(null, item)}
-                disabled={item.status.toLowerCase() == "not-available"}
-              >
-                Add To Cart
-              </Button>
+                <img
+                  className={classes["item-img"]}
+                  src={item.images[0]}
+                  alt="img"
+                />
+                <h1 className={classes["item-author"]}>- {item.authorName}</h1>
+                <h1 className={classes["item-name"]}>{item.bookName}</h1>
+              </div>
+              <div className={classes["item-ctrl"]}>
+                <span
+                  className={`${classes["item-price"]} ${
+                    isItemAvailable ? classes["item-price--disable"] : ""
+                  }`}
+                >
+                  {item.price} &#8377;
+                </span>
+                <Button
+                  className="btn-large"
+                  color="var(--primary-font-color)"
+                  onClick={addToCartHandler.bind(null, item)}
+                  disabled={isItemAvailable}
+                >
+                  Add To Cart
+                </Button>
+              </div>
             </div>
-          </div>
-        ))
+          );
+        })
       ) : (
         <p className={"not-found-text"}>No Items Found!!</p>
       )}

@@ -1,6 +1,15 @@
 .divider {
-    height: 3px;
-    background-color: var(--tertiary-font-color);
-    margin-top: 10rem;
-    width: 70%;
+  height: 3px;
+  background-color: var(--tertiary-font-color);
+  margin-top: 10rem;
+  width: 70%;
+}
+.btn-container {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 5rem;
+}
+.btn-container > button {
+  padding: 2rem 0;
 }
