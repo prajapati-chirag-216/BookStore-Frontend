@@ -1,27 +1,29 @@
 .about-container {
-    width: 100%;
-    margin-top: 7rem;
+  width: 100%;
+  margin-top: 7rem;
 }
 
 .container-content {
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-    margin-top: 5rem;
-    flex: 3.6;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  margin-top: 5rem;
+  flex: 3.6;
+  padding: 5rem 8%;
 }
 
 .divider {
-    width: 8rem;
-    border: 2px solid var(--default-font-color);
+  width: 8rem;
+  border: 2px solid var(--default-font-color);
 }
 
 .heading-secondary {
-    font-size: 4.2rem;
-    color: var(--default-font-color);
+  font-size: var(--large-font-size);
+  color: var(--default-font-color);
 }
 
 .container-text {
-    font-size: var(--medium-font-size);
-    color: var(--primary-font-color);
+  font-size: var(--medium-font-size);
+  color: var(--primary-font-color);
+  text-align: justify;
 }

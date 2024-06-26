@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ProductContent from "../Product/ProductContent";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
-import { STATUS, WINDOW_SIZE } from "../../utils/variables";
+import { SORTING_OPTIONS, STATUS, WINDOW_SIZE } from "../../utils/variables";
 import Button from "../Button";
 import classes from "./index.module.css";
 
@@ -19,7 +19,9 @@ function Product() {
   const [items, setItems] = useState([]);
   const [pageNo, setPageNo] = useState(+localStorage.getItem("pageNo") || 1);
   const [haveMoreData, setHaveMoreData] = useState(false);
-  const [currentFilter, setCurrentFilter] = useState("sortByNewDate");
+  const [currentFilter, setCurrentFilter] = useState(
+    SORTING_OPTIONS.SORT_BY_DATE_NEW_TO_OLD
+  );
   const [searchText, setSearchText] = useState("");
   const [categoryName, setCategoryName] = useState("");
 
